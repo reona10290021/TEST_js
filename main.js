@@ -8,15 +8,16 @@ let elapsed = 0;
 let intervalId = null;
 
 function updateTime () {
-  const ms = elapsed % 100;
-  const s = Math.floor(elapsed / 1000) % 60;
+  
+  const ms = elapsed % 1000;
+  const s = Math.floor(elapsed / 1000) %60;
   const m = Math.floor(elapsed / (1000*60)) %60;
   const h = Math.floor(elapsed / (1000*60*60));
   
-  const msStr = ms.toString();
-  const sStr = s.toString();
-  const mStr = m.toString();
-  const hStr = h.toString();
+  const msStr = ms.toString().padStart(3,"0");
+  const sStr = s.toString().padStart(2,"0");
+  const mStr = m.toString().padStart(2,"0");
+  const hStr = h.toString().padStart(2,"0");
   
   timeElement.innerHTML = `${hStr}:${mStr}:${sStr}:${msStr}`;
 };
@@ -30,7 +31,7 @@ start.addEventListener('click', function(e) {
     pre = now;
     updateTime();
     //console.log(elapsed);
-  }, 100);
+  }, 10);
 });
 
 stop.addEventListener("click", function(e) {
